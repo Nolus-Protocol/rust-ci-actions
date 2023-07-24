@@ -1,0 +1,21 @@
+name: "Check features"
+description: "Action for checking features and feature gates"
+author: "The Dev Nolus Team <dev@nolus.io>"
+
+runs:
+  using: "composite"
+  steps:
+    - shell: "sh"
+      run: "cargo install cargo-hack"
+    - name: "Check features on dev profile"
+      shell: "sh"
+      run: cargo hack --clean-per-run --feature-powerset clippy --profile dev -- -D warnings
+    - name: "Check features on test profile without debug assertions"
+      shell: "sh"
+      run: cargo hack --clean-per-run --feature-powerset clippy --profile test -- -C debug-assertions=false -D warnings
+    - name: "Check features on test profile with debug assertions"
+      shell: "sh"
+      run: cargo hack --clean-per-run --feature-powerset clippy --profile test -- -C debug-assertions=true -D warnings
+    - name: "Check features on release profile"
+      shell: "sh"
+      run: cargo hack --clean-per-run --feature-powerset clippy --profile release -- -D warnings
