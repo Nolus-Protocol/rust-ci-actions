@@ -1,0 +1,12 @@
+name: "Check for unused dependencies"
+description: "Action for checking for unused dependencies"
+author: "The Dev Nolus Team <dev@nolus.io>"
+
+runs:
+  using: "composite"
+  steps:
+    - shell: "sh"
+      run: "cargo install cargo-hack cargo-udeps"
+    - name: "Check for unused dependencies"
+      shell: "sh"
+      run: cargo +nightly hack --clean-per-run udeps
