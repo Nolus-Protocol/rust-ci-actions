@@ -6,6 +6,8 @@ runs:
   using: "composite"
   steps:
     - shell: "sh"
+      run: "rustup toolchain add nightly --profile minimal"
+    - shell: "sh"
       run: "cargo install cargo-hack cargo-udeps"
     - name: "Check for unused dependencies"
       shell: "sh"
