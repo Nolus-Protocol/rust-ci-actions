@@ -2,12 +2,6 @@ name: "Run code coverage test"
 description: "Action for running code coverage testing"
 author: "The Dev Nolus Team <dev@nolus.io>"
 
-inputs:
-  release-testing:
-    description: 'Boolean value indicating whether to include test run in release profile or not.'
-    required: true
-    default: "false"
-
 runs:
   using: "composite"
   steps:
@@ -24,7 +18,3 @@ runs:
       with:
         name: "code_coverage-report"
         path: "cobertura.xml"
-    - name: "Run tests in release profile"
-      if: "${{ inputs.release-testing }} == \"true\""
-      shell: "sh"
-      run: "cargo test --release"
