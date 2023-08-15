@@ -6,7 +6,7 @@ runs:
   using: "composite"
   steps:
     - shell: "sh"
-      run: "cargo install cargo-hack"
+      run: "cargo +stable install cargo-hack"
     - name: "Check features on dev profile"
       shell: "sh"
       run: cargo hack --clean-per-run --feature-powerset clippy --profile dev -- -D warnings

@@ -6,7 +6,7 @@ runs:
   using: "composite"
   steps:
     - shell: "sh"
-      run: "cargo install cargo-workspaces"
+      run: "cargo +stable install cargo-hack"
     - name: "Check codebase"
       shell: "sh"
-      run: "cargo workspaces exec cargo check"
+      run: "cargo hack check"

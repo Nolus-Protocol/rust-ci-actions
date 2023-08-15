@@ -6,7 +6,7 @@ runs:
   using: "composite"
   steps:
     - shell: "sh"
-      run: "cargo install cargo-audit"
+      run: "cargo +stable install cargo-audit"
     - name: "Audit dependencies"
       shell: "sh"
       run: "cargo audit"
