@@ -2,6 +2,11 @@ name: "Audit dependencies"
 description: "Action for running `cargo-audit`"
 author: "The Dev Nolus Team <dev@nolus.io>"
 
+inputs:
+  working_directory:
+    description: "Sets working directory for any operations executing through `cargo`."
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -10,3 +15,4 @@ runs:
     - name: "Audit dependencies"
       shell: "sh"
       run: "cargo audit"
+      working-directory: "${{ inputs.working_directory }}"

@@ -2,6 +2,11 @@ name: "Run code coverage test"
 description: "Action for running code coverage testing"
 author: "The Dev Nolus Team <dev@nolus.io>"
 
+inputs:
+  working_directory:
+    description: "Sets working directory for any operations executing through `cargo`."
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -10,11 +15,12 @@ runs:
     - name: "Run code coverage testing"
       shell: "sh"
       run: "cargo tarpaulin --out xml >> output.log"
+      working-directory: "${{ inputs.working_directory }}"
     - name: "Produce code coverage summary"
       shell: "sh"
-      run: "(tail --lines=1 output.log | sed -r -e 's/^([0-9]+(\\.[0-9]+)?%).*/# Code coverage: \\1/') >> $GITHUB_STEP_SUMMARY"
+      run: "(tail --lines=1 ${{ inputs.working_directory }}/output.log | sed -r -e 's/^([0-9]+(\\.[0-9]+)?%).*/# Code coverage: \\1/') >> $GITHUB_STEP_SUMMARY"
     - name: "Archive code coverage results"
       uses: "actions/upload-artifact@v3"
       with:
         name: "code_coverage-report"
-        path: "cobertura.xml"
+        path: "${{ inputs.working_directory }}/cobertura.xml"

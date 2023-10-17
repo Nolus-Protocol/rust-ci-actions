@@ -3,6 +3,9 @@ description: "Action for checking features and feature gates"
 author: "The Dev Nolus Team <dev@nolus.io>"
 
 inputs:
+  working_directory:
+    description: "Sets working directory for any operations executing through `cargo`."
+    required: true
   profile:
     description: "Specifies in which profile check should be run."
     required: true
@@ -23,3 +26,4 @@ runs:
         fi
 
         cargo hack --clean-per-run --feature-powerset clippy --profile test -- -D warnings
+      working-directory: "${{ inputs.working_directory }}"

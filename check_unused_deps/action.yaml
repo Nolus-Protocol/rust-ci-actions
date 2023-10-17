@@ -2,6 +2,11 @@ name: "Check for unused dependencies"
 description: "Action for checking for unused dependencies"
 author: "The Dev Nolus Team <dev@nolus.io>"
 
+inputs:
+  working_directory:
+    description: "Sets working directory for any operations executing through `cargo`."
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -12,3 +17,4 @@ runs:
     - name: "Check for unused dependencies"
       shell: "sh"
       run: cargo +nightly hack --clean-per-run udeps
+      working-directory: "${{ inputs.working_directory }}"
