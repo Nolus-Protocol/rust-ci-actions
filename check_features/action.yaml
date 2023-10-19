@@ -25,5 +25,5 @@ runs:
           );
         fi
 
-        cargo hack --clean-per-run --feature-powerset clippy --profile test -- -D warnings
+        cargo hack --clean-per-run --feature-powerset clippy --profile ${{ inputs.profile }} -- -D warnings
       working-directory: "${{ inputs.working_directory }}"
