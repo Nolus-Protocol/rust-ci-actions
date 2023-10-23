@@ -6,6 +6,9 @@ inputs:
   working_directory:
     description: "Sets working directory for any operations executing through `cargo`."
     required: true
+  rustflags:
+    description: "Value to be passed as an environment variable to the Rust build system."
+    required: false
 
 runs:
   using: "composite"
@@ -14,5 +17,7 @@ runs:
       run: "cargo +stable install cargo-hack"
     - name: "Check codebase"
       shell: "sh"
+      env:
+        RUSTFLAGS: "${{ inputs.rustflags }}"
       run: "cargo hack check"
       working-directory: "${{ inputs.working_directory }}"

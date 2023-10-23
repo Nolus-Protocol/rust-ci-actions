@@ -11,6 +11,9 @@ inputs:
     required: true
   debug_assertions:
     description: "Specifies what `debug-assertions` should be set to."
+  rustflags:
+    description: "Value to be passed as an environment variable to the Rust build system."
+    required: false
 
 runs:
   using: "composite"
@@ -18,6 +21,8 @@ runs:
     - shell: "sh"
       run: "cargo +stable install cargo-hack"
     - shell: "sh"
+      env:
+        RUSTFLAGS: "${{ inputs.rustflags }}"
       run: |
         if ! test "${{ inputs.debug_assertions }}" = "";
           then (
