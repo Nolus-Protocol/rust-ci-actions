@@ -6,6 +6,9 @@ inputs:
   working_directory:
     description: "Sets working directory for any operations executing through `cargo`."
     required: true
+  features:
+    description: "Features to be turned on during compilation."
+    required: false
   rustflags:
     description: "Value to be passed as an environment variable to the Rust build system."
     required: false
@@ -19,5 +22,5 @@ runs:
       shell: "sh"
       env:
         RUSTFLAGS: "${{ inputs.rustflags }}"
-      run: "cargo hack check"
+      run: "cargo hack --include-features '${{ inputs.features }}' check"
       working-directory: "${{ inputs.working_directory }}"

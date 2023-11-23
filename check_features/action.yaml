@@ -11,6 +11,8 @@ inputs:
     required: true
   debug_assertions:
     description: "Specifies what `debug-assertions` should be set to."
+  features:
+    description: "Features to be turned on during compilation."
     required: false
   rustflags:
     description: "Value to be passed as an environment variable to the Rust build system."
@@ -31,5 +33,5 @@ runs:
           );
         fi
 
-        cargo hack --clean-per-run --feature-powerset clippy --profile ${{ inputs.profile }} -- -D warnings
+        cargo hack --clean-per-run --include-features '${{ inputs.features }}' --feature-powerset clippy --profile ${{ inputs.profile }} -- -D warnings
       working-directory: "${{ inputs.working_directory }}"
