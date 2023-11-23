@@ -11,6 +11,7 @@ inputs:
     required: true
   debug_assertions:
     description: "Specifies what `debug-assertions` should be set to."
+    required: false
   rustflags:
     description: "Value to be passed as an environment variable to the Rust build system."
     required: false
