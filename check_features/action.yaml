@@ -33,5 +33,5 @@ runs:
           );
         fi
 
-        cargo hack --clean-per-run --include-features '${{ inputs.features }}' --feature-powerset clippy --profile ${{ inputs.profile }} -- -D warnings
+        cargo hack --clean-per-run --include-features '${{ inputs.features }}' --ignore-unknown-features --feature-powerset clippy --profile ${{ inputs.profile }} -- -D warnings
       working-directory: "${{ inputs.working_directory }}"
