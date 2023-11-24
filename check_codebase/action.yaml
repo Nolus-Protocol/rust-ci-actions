@@ -22,5 +22,8 @@ runs:
       shell: "sh"
       env:
         RUSTFLAGS: "${{ inputs.rustflags }}"
-      run: "cargo hack --features '${{ inputs.features }}' $(if test '${{ inputs.features }}' != ''; then echo '--ignore-unknown-features'; fi) check"
+      run: |
+        cargo hack \
+          $(if test '${{ inputs.features }}' != ''; then echo "--features '${{ inputs.features }}' --ignore-unknown-features"; fi) \
+          check
       working-directory: "${{ inputs.working_directory }}"
