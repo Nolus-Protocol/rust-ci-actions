@@ -24,5 +24,5 @@ runs:
       shell: "sh"
       env:
         RUSTFLAGS: "${{ inputs.rustflags }}"
-      run: "cargo +nightly hack --features '${{ inputs.features }}' --ignore-unknown-features --clean-per-run udeps"
+      run: "cargo +nightly hack --features '${{ inputs.features }}' $(if test '${{ inputs.features }}' != ''; then echo '--ignore-unknown-features'; fi) --clean-per-run udeps"
       working-directory: "${{ inputs.working_directory }}"
