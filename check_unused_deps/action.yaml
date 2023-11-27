@@ -27,5 +27,5 @@ runs:
       run: |
         cargo +nightly hack \
           $(if test '${{ inputs.features }}' != ''; then echo " --features '${{ inputs.features }}' --ignore-unknown-features"; fi) \
-          --clean-per-run udeps
+          --clean-per-run udeps --all-targets
       working-directory: "${{ inputs.working_directory }}"
