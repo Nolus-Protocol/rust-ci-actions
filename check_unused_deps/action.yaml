@@ -9,9 +9,6 @@ inputs:
   features:
     description: "Features to be turned on during compilation."
     required: false
-  exclude_features:
-    description: "Features to be turned off during compilation with mixed features."
-    required: false
   rustflags:
     description: "Value to be passed as an environment variable to the Rust build system."
     required: false
@@ -30,6 +27,5 @@ runs:
       run: |
         cargo +nightly hack \
           $(if test '${{ inputs.features }}' != ''; then echo " --features '${{ inputs.features }}' --ignore-unknown-features"; fi) \
-          $(if test '${{ inputs.exclude_features }}' != ''; then echo "--exclude-features '${{ inputs.exclude_features }}'"; fi) \
           --clean-per-run udeps
       working-directory: "${{ inputs.working_directory }}"
