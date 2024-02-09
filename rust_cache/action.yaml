@@ -16,12 +16,12 @@ runs:
         path: |
           ~/.cargo/
         key: "${{ runner.os }}-cargo"
-    - if: "fromJSON(inputs.update_and_cache_toolchains)"
-      shell: "sh"
-      run: "rustup update"
     - uses: "actions/cache@v4"
       if: "fromJSON(inputs.update_and_cache_toolchains)"
       with:
         path: |
           ~/.rustup/
         key: "${{ runner.os }}-rustup"
+    - if: "fromJSON(inputs.update_and_cache_toolchains)"
+      shell: "sh"
+      run: "rustup update"
