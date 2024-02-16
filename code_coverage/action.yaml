@@ -28,7 +28,7 @@ runs:
       shell: "sh"
       run: "(tail --lines=1 ${{ inputs.working_directory }}/output.log | sed -r -e 's/^([0-9]+(\\.[0-9]+)?%).*/# Code coverage: \\1/') >> $GITHUB_STEP_SUMMARY"
     - name: "Archive code coverage results"
-      uses: "actions/upload-artifact@v3"
+      uses: "actions/upload-artifact@v4"
       with:
         name: "code_coverage-report"
         path: "${{ inputs.working_directory }}/cobertura.xml"
